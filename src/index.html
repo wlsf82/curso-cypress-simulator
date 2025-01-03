@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Interactive Cypress Simulator</title>
+  <link rel="stylesheet" href="style.css">
+  <script src="https://unpkg.com/lucide@latest/dist/umd/lucide.min.js"></script>
+</head>
+<body>
+  <header>
+    <h1>Cypress Simulator</h1>
+    <p>Explore and experiment with Cypress commands in real-time!</p>
+    <div class="header-actions">
+      <button id="sandwich-menu" class="sandwich-menu" aria-label="Open menu" aria-expanded="false" aria-controls="dropdown-menu" tabindex="0">
+        <i data-lucide="menu"></i>
+      </button>
+      <nav id="dropdown-menu" class="dropdown-menu">
+        <button id="logoutButton">Logout</button>
+      </nav>
+    </div>
+  </header>
+  <main id="login">
+    <h2>Let's get started!</h2>
+    <form>
+      <button>Login</button>
+    </form>
+  </main>
+  <main id="captcha" style="display: none;">
+    <h2>Security Check</h2>
+    <div class="captcha-container">
+      <p>Please solve this simple math problem to continue:</p>
+      <div class="captcha-challenge"></div>
+      <input type="number" id="captchaInput" placeholder="Enter your answer" aria-label="Captcha answer">
+      <button id="verifyCaptcha" disabled>Verify</button>
+      <p id="captchaError" class="error" style="display: none;">Incorrect answer, please try again.</p>
+    </div>
+  </main>
+  <main class="content">
+    <section class="commands">
+      <h2>Useful Commands</h2>
+      <ul>
+        <li><strong><span class="cy-light">cy</span><span class="dot-light">.</span><span class="command-light">visit</span><span class="parens-light">(</span><span class="param-light">url</span><span class="parens-light">)</span></strong> - Navigate to a page</li>
+        <li><strong><span class="cy-light">cy</span><span class="dot-light">.</span><span class="command-light">get</span><span class="parens-light">(</span><span class="param-light">selector</span><span class="parens-light">)</span></strong> - Get DOM elements</li>
+        <li><strong><span class="cy-light">cy</span><span class="dot-light">.</span><span class="command-light">contains</span><span class="parens-light">(</span><span class="param-light">text</span><span class="parens-light">)</span></strong> - Find elements by text</li>
+        <li><strong><span class="cy-light">cy</span><span class="dot-light">.</span><span class="command-light">request</span><span class="parens-light">(</span><span class="param-light">method, url</span><span class="parens-light">)</span></strong> - Make an HTTP request</li>
+        <li><strong><span class="cy-light">cy</span><span class="dot-light">.</span><span class="command-light">exec</span><span class="parens-light">(</span><span class="param-light">cmd</span><span class="parens-light">)</span></strong> - Execute a system command</li>
+        <li><strong><span class="cy-light">cy</span><span class="dot-light">.</span><span class="command-light">log</span><span class="parens-light">(</span><span class="param-light">message</span><span class="parens-light">)</span></strong> - Print a message to the Cypress Command Log</li>
+      </ul>
+    </section>
+    <section class="code-snippet">
+      <h2>Cypress Code</h2>
+      <p>To get help, type <strong>help</strong> and hit the run button.</p>
+      <p>Or, simply write and run a Cypress command, like <strong><span class="cy-light">cy</span><span class="dot-light">.</span><span class="command-light">get</span><span class="parens-light">(</span><span class="string-light">'button'</span><span class="parens-light">)</span></strong>.</p>
+      <textarea id="codeInput" placeholder="Write your Cypress code here..."></textarea>
+      <button id="runButton" disabled>Run</button>
+    </section>
+    <section class="output">
+      <h2>Cypress Output</h2>
+      <div class="expand-collapse"
+           role="button"
+           tabindex="0"
+           aria-label="Toggle output size"
+           aria-expanded="false">
+        <i id="expandIcon" data-lucide="maximize-2" aria-hidden="true"></i>
+        <i id="collapseIcon" data-lucide="minimize-2" style="display: none;" aria-hidden="true"></i>
+      </div>
+      <pre id="outputArea" style="overflow-y: auto" tabindex="0"></pre>
+    </section>
+    <div id="cookieConsent" class="banner" style="display: none;">
+      <div class="content">
+        <p>We use cookies 🍪 to ensure our application functions properly, to enhance user experience, and to gather insights on application usage.</p>
+        <p>By clicking "Accept," you consent to our use of cookies. If you click "Decline," we won't use cookies, and your personal information will not be tracked.</p>
+        <div class="buttons">
+          <button id="acceptCookies">Accept</button>
+          <button id="declineCookies">Decline</button>
+        </div>
+      </div>
+    </div>
+  </main>
+  <footer>
+    <p>Powered by Talking About Testing</p>
+    <ul>
+      <li>
+        <a href="https://talkingabouttesting.com" target="_blank" rel="noopener noreferrer">Blog</a>
+      </li>
+      <li>
+        <a href="https://youtube.com/@talkingabouttesting" target="_blank" rel="noopener noreferrer">YouTube</a>
+      </li>
+      <li>
+        <a href="https://open.spotify.com/show/5HFlqWkk6qtgJquUixyuKo" target="_blank"
+          rel="noopener noreferrer">Podcast</a>
+      </li>
+      <li>
+        <a href="https://udemy.com/user/walmyr" target="_blank" rel="noopener noreferrer">Udemy</a>
+      </li>
+    </ul>
+  </footer>
+  <script src="script.js"></script>
+</body>
+</html>
