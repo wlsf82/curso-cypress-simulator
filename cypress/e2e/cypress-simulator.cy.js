@@ -68,8 +68,22 @@ describe("Cypress Simulator", () => {
       .and("be.visible")
   })
 
-  it("maximize/minimize", () => {
-    
+  it("maximizes and minimizes a simulation result", () => {
+    cy.get("textarea[placeholder='Write your Cypress code here...']")
+      .type("cy.log('Yay!')")
+    cy.contains("button", "Run").click()
+
+    cy.get('.expand-collapse').click()
+
+    cy.get("#outputArea", { timeout: 6000 })
+      .should("contain", "Success:")
+      .and("contain", "cy.log('Yay!') // Logged message 'Yay!'")
+      .and("be.visible")
+    cy.get("#collapseIcon").should("be.visible")
+
+    cy.get(".expand-collapse").click()
+
+    cy.get("#expandIcon").should("be.visible")
   })
 
   it("logout", () => {
