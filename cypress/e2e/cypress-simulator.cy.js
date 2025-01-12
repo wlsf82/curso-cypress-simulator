@@ -19,8 +19,15 @@ describe("Cypress Simulator", () => {
       .and("be.visible")
   })
 
-  it("error: invalid command scenario", () => {
-    
+  it("shows an error when entering and running an invalid Cypress command (e.g., cy.run())", () => {
+    cy.get("textarea[placeholder='Write your Cypress code here...']")
+      .type("cy.run()")
+    cy.contains("button", "Run").click()
+
+    cy.get("#outputArea", { timeout: 6000 })
+      .should("contain", "Error:")
+      .and("contain", "Invalid Cypress command: cy.run()")
+      .and("be.visible")
   })
 
   it("warning", () => {
