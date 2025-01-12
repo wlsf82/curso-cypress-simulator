@@ -102,8 +102,27 @@ describe("Cypress Simulator", () => {
     cy.contains("button", "Logout").should("not.be.visible")
   })
 
-  it("Running... state", () => {
-    
+  it("shows the running state before showing the final result", () => {
+    cy.get("textarea[placeholder='Write your Cypress code here...']")
+      .type("cy.log('Yay!')")
+    cy.contains("button", "Run").click()
+
+    cy.contains("button", "Running...").should("be.visible")
+    cy.contains("#outputArea", "Running... Please wait.")
+      .should("be.visible")
+
+    cy.contains(
+      "button",
+      "Running...",
+      { timeout:  6000 }
+    ).should("not.exist")
+    cy.contains("button", "Run").should("be.visible")
+    cy.contains("#outputArea", "Running... Please wait.", { timeout: 6000})
+      .should("not.exist")
+    cy.get("#outputArea")
+      .should("contain", "Success:")
+      .and("contain", "cy.log('Yay!') // Logged message 'Yay!'")
+      .and("be.visible")
   })
 
   it("Accept cookies", () => {
