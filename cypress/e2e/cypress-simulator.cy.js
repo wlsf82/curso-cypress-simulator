@@ -1,4 +1,9 @@
 describe("Cypress Simulator", () => {
+  beforeEach(() => {
+    cy.visit("./src/index.html?skipCaptcha=true")
+    cy.contains("button", "Login").click()
+  })
+
   it("success", () => {
     
   })
