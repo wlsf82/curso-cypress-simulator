@@ -199,7 +199,16 @@ describe("Cypress Simulator - Captcha", () => {
     cy.contains("button", "Verify").should("be.disabled")
   })
 
-  it("Captcha error", () => {
-    
+  it("shows an error on a wrong captcha answer and goes back to its initial state", () => {
+    cy.get("input[placeholder='Enter your answer']").type("1000")
+    cy.contains("button", "Verify").should("be.enabled")
+
+    cy.contains("button", "Verify").click()
+
+    cy.contains(".error", "Incorrect answer, please try again.")
+      .should("be.visible")
+    cy.get("input[placeholder='Enter your answer']")
+      .should("have.value", "")
+    cy.contains("button", "Verify").should("be.disabled")
   })
 })
