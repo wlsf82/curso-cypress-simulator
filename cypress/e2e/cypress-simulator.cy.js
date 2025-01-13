@@ -163,8 +163,16 @@ describe("Cypress Simulator", () => {
     cy.contains("button", "Run").should("be.disabled")
   })
 
-  it("Reset output on logout and login", () => {
-    
+  it("clears the code output when logging off then logging in again", () => {
+    cy.get("textarea[placeholder='Write your Cypress code here...']")
+      .type("cy.log('Yo!')")
+    cy.contains("button", "Run").click()
+
+    cy.get("#sandwich-menu").click()
+    cy.contains("button", "Logout").click()
+    cy.contains("button", "Login").click()
+
+    cy.get("#outputArea").should("not.contain", "cy.log('Yo!')")
   })
 
   it("No cookings banner on the login page", () => {
