@@ -154,10 +154,6 @@ describe("Cypress Simulator", () => {
   it("No cookings banner on the login page", () => {
     
   })
-
-  it("No cookings banner on the login page", () => {
-    
-  })
 })
 
 describe("Cypress Simulator - Cookies Consent", () => {
