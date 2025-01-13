@@ -18,6 +18,8 @@ describe("Cypress Simulator - A11y Checks", () => {
       .should("contain", "Success:")
       .and("contain", "cy.log('Yay!') // Logged message 'Yay!'")
       .and("be.visible")
+
+    cy.checkA11y(".success")
   })
 
   it("shows an error when entering and running an invalid Cypress command (e.g., cy.run())", () => {
@@ -29,6 +31,8 @@ describe("Cypress Simulator - A11y Checks", () => {
       .should("contain", "Error:")
       .and("contain", "Invalid Cypress command: cy.run()")
       .and("be.visible")
+
+    cy.checkA11y(".error")
   })
 
   it("shows a warning when entering and running a not-implemented Cypress command (e.g., cy.contains('Login'))", () => {
@@ -40,6 +44,8 @@ describe("Cypress Simulator - A11y Checks", () => {
       .should("contain", "Warning:")
       .and("contain", "The `cy.contains` command has not been implemented yet.")
       .and("be.visible")
+
+    cy.checkA11y(".warning")
   })
 
   it("asks for help and gets common Cypress commands and examples with a link to the docs", () => {
@@ -56,6 +62,8 @@ describe("Cypress Simulator - A11y Checks", () => {
       .and("have.attr", "target", "_blank")
       .and("have.attr", "rel", "noopener noreferrer")
       .and("be.visible")
+
+    cy.checkA11y("#outputArea")
   })
 
   it("maximizes and minimizes a simulation result", () => {
@@ -121,6 +129,8 @@ describe("Cypress Simulator - A11y Checks", () => {
       .should("contain", "Success:")
       .and("contain", "cy.log('Yay!') // Logged message 'Yay!'")
       .and("be.visible")
+
+    cy.checkA11y()
   })
 })
 
