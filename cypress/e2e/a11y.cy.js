@@ -153,23 +153,16 @@ describe("Cypress Simulator - Captcha", () => {
   beforeEach(() => {
     cy.visit("./src/index.html")
     cy.contains("button", "Login").click()
+    cy.injectAxe()
   })
 
-  it("disables the captcha verify button when no answer is provided or it's cleared", () => {
+  it("finds no a11y issues on all captcha view states (button enabled/disabled and error)", () => {
     cy.contains("button", "Verify").should("be.disabled")
 
-    cy.get("input[placeholder='Enter your answer']").type("1")
-
-    cy.contains("button", "Verify").should("be.enabled")
-
-    cy.get("input[placeholder='Enter your answer']").clear()
-
-    cy.contains("button", "Verify").should("be.disabled")
-  })
-
-  it("shows an error on a wrong captcha answer and goes back to its initial state", () => {
     cy.get("input[placeholder='Enter your answer']").type("1000")
     cy.contains("button", "Verify").should("be.enabled")
+
+    cy.checkA11y()
 
     cy.contains("button", "Verify").click()
 
@@ -178,5 +171,7 @@ describe("Cypress Simulator - Captcha", () => {
     cy.get("input[placeholder='Enter your answer']")
       .should("have.value", "")
     cy.contains("button", "Verify").should("be.disabled")
+
+    cy.checkA11y()
   })
 })
