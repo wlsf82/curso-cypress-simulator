@@ -176,7 +176,15 @@ describe("Cypress Simulator - Cookies Consent", () => {
       .should("be.equal", "accepted")
   })
 
-  it("Decline cookies", () => {
-    
+  it("declines on the cookies usage", () => {
+    cy.get("#cookieConsent")
+      .as("cookieConsentBanner")
+      .find("button:contains('Decline')")
+      .click()
+
+    cy.get("@cookieConsentBanner").should("not.be.visible")
+    cy.window()
+      .its("localStorage.cookieConsent")
+      .should("be.equal", "declined")
   })
 })
