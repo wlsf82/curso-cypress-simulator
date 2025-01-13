@@ -562,6 +562,7 @@ nav#menu button:hover {
   text-align: center;
   font-size: 0.9rem;
   margin-top: 10px;
+  color: #AB1A0D;
 }
 
 button:disabled {
