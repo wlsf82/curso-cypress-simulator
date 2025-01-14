@@ -294,7 +294,7 @@ document.addEventListener("DOMContentLoaded", () => {
   logoutButton.addEventListener("click", () => {
     localStorage.removeItem("cypressSimulatorSession")
 
-    codeInput.value = ""
+    // codeInput.value = ""
     outputArea.innerHTML = ""
     runButton.disabled = true
     loginForm.style.display = "flex"
