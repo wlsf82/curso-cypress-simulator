@@ -1,11 +1,11 @@
 describe("Cypress Simulator", () => {
   beforeEach(() => {
+    cy.login()
     cy.visit("./src/index.html?skipCaptcha=true", {
       onBeforeLoad(win) {
         win.localStorage.setItem("cookieConsent", "accepted")
       }
     })
-    cy.contains("button", "Login").click()
   })
 
   it("shows an error when entering and running a valid Cypress command without parentheses (e.g., cy.visit)", () => {
@@ -80,8 +80,8 @@ describe("Cypress Simulator", () => {
 
 describe("Cypress Simulator - Cookies Consent", () => {
   beforeEach(() => {
+    cy.login()
     cy.visit("./src/index.html?skipCaptcha=true")
-    cy.contains("button", "Login").click()
   })
 
   it("declines on the cookies usage", () => {
