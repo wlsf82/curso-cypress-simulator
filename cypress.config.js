@@ -7,6 +7,10 @@ module.exports = defineConfig({
   viewportWidth: 1700,
   e2e: {
     fixturesFolder: false,
+    retries: {
+      runMode: 2,
+      openMode: 0,
+    },
     setupNodeEvents(on, config) {
       cypressSplit(on, config)
       return config
