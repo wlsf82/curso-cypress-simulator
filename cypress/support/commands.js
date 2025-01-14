@@ -21,3 +21,9 @@ Cypress.Commands.add("login", () => {
     options
   )
 })
+
+Cypress.Commands.add('run', cmd => {
+  cy.get("textarea[placeholder='Write your Cypress code here...']")
+    .type(cmd)
+  cy.contains("button", "Run").click()
+})
