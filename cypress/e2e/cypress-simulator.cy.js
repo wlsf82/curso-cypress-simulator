@@ -74,6 +74,7 @@ describe("Cypress Simulator", () => {
 
     cy.reload()
 
+    cy.contains("button", "Login").should("be.visible")
     cy.get("#cookieConsent").should("not.be.visible")
   })
 })
