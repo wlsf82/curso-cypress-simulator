@@ -57,6 +57,11 @@ describe("Cypress Simulator", () => {
   it("clears the code output when logging off then logging in again", () => {
     cy.run("cy.log('Yo!')")
 
+    cy.get('#outputArea', { timeout: 6000 })
+      .should("contain", "Success:")
+      .and("contain", "cy.log('Yo!') // Logged message 'Yo!'")
+      .and("be.visible")
+
     cy.get("#sandwich-menu").click()
     cy.contains("button", "Logout").click()
     cy.contains("button", "Login").click()
