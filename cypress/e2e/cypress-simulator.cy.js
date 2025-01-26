@@ -44,7 +44,8 @@ describe("Cypress Simulator", () => {
   })
 
   it("disables the run button when logging off then logging in again", () => {
-    cy.run("cy.log('Yo!')")
+    cy.get("textarea[placeholder='Write your Cypress code here...']")
+      .type("cy.log('Yo!')")
 
     cy.get("#sandwich-menu").click()
     cy.contains("button", "Logout").click()
