@@ -1,16 +1,16 @@
 describe('Cypress simulator', () => {
   beforeEach(() => {
-    cy.visit('./src/index.html?skipCaptcha=true',{
+    cy.visit('./src/index.html?skipCaptcha=true', {
       onBeforeLoad(win) {
         win.localStorage.setItem("cookieConsent", "accepted")
       }
     })
     cy.contains('button', 'Login').click();
   });
-  it.only(`it successfully simulates a Cypress command (cy.log('Yay!'))`, () => {
+  it.only(`Success: valid cypress command`, () => {
     cy.get('#codeInput')
       .type('cy.log("Yay!")')
-      
+
     cy.get('#runButton')
       .click();
 
@@ -20,20 +20,57 @@ describe('Cypress simulator', () => {
       .and('be.visible')
   })
 
-  it('Error: invalid cypress command ', () => {
+  it.only('Error: invalid cypress command ', () => {
+    cy.get('#codeInput')
+      .type('cy.run()')
 
+    cy.get('#runButton')
+      .click();
+
+    cy.get('#outputArea', { timeout: 6000 })
+      .should('contain', 'Error:')
+      .and('contain', 'Invalid Cypress command: cy.run()')
+      .and('be.visible')
   });
 
-  it('Warning', () => {
+  it.only('Warning: Cypress command not implemented', () => {
+    cy.get('#codeInput')
+      .type('cy.contains("Login")')
 
+    cy.get('#runButton')
+      .click();
+
+    cy.get('#outputArea', { timeout: 6000 })
+      .should('contain', 'Warning:')
+      .and('contain', 'The `cy.contains` command has not been implemented yet.')
+      .and('be.visible')
   });
 
-  it('Error: valid command withou parentheses', () => {
+  it.only('Error: valid command withou parentheses', () => {
+    cy.get('#codeInput')
+      .type('cy.visit')
 
+    cy.get('#runButton')
+      .click();
+
+    cy.get('#outputArea', { timeout: 6000 })
+      .should('contain', 'Error:')
+      .and('contain', 'Missing parentheses on `cy.visit` command')
+      .and('be.visible')
   });
 
-  it('Help', () => {
+  it.only('Help command', () => {
+    cy.get('#codeInput')
+      .type('help')
 
+    cy.get('#runButton')
+      .click();
+
+    cy.get('#outputArea', { timeout: 6000 })
+      .should('contain', 'Common Cypress commands and examples:')
+      .and('contain', "1. cy.visit(url: string) Description: Navigate to a specific URL.Example: cy.visit('https://example.com')")
+      .and('contain', "2. cy.get(selector: string) Description: Get a DOM element based on a selector. Example: cy.get('.button-class')")
+      .and('be.visible')
   });
 
   it('Maximize/minimize', () => {
