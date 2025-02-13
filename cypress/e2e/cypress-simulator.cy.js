@@ -68,9 +68,14 @@ describe('Cypress simulator', () => {
 
     cy.get('#outputArea', { timeout: 6000 })
       .should('contain', 'Common Cypress commands and examples:')
-      .and('contain', "1. cy.visit(url: string) Description: Navigate to a specific URL.Example: cy.visit('https://example.com')")
-      .and('contain', "2. cy.get(selector: string) Description: Get a DOM element based on a selector. Example: cy.get('.button-class')")
+      .and('contain', 'For more commands and details, visit the official Cypress API documentation.')
       .and('be.visible')
+
+      cy.contains('#outpuArea a', 'official Cypress API documentation')
+        .should('have.attr', 'href', 'https://docs.cypress.io/api/table-of-contents')
+        .and('have.attr', 'target', '_blank')
+        .and('have.attr', 'rel', 'noopener noreferrer')
+        .and('be.visible')
   });
 
   it('Maximize/minimize', () => {
