@@ -7,7 +7,7 @@ describe('Cypress simulator', () => {
     })
     cy.contains('button', 'Login').click();
   });
-  it.only(`Success: valid cypress command`, () => {
+  it(`Success: valid cypress command`, () => {
     cy.get('#codeInput')
       .type('cy.log("Yay!")')
 
@@ -20,7 +20,7 @@ describe('Cypress simulator', () => {
       .and('be.visible')
   })
 
-  it.only('Error: invalid cypress command ', () => {
+  it('Error: invalid cypress command ', () => {
     cy.get('#codeInput')
       .type('cy.run()')
 
@@ -33,7 +33,7 @@ describe('Cypress simulator', () => {
       .and('be.visible')
   });
 
-  it.only('Warning: Cypress command not implemented', () => {
+  it('Warning: Cypress command not implemented', () => {
     cy.get('#codeInput')
       .type('cy.contains("Login")')
 
@@ -46,7 +46,7 @@ describe('Cypress simulator', () => {
       .and('be.visible')
   });
 
-  it.only('Error: valid command withou parentheses', () => {
+  it('Error: valid command withou parentheses', () => {
     cy.get('#codeInput')
       .type('cy.visit')
 
@@ -59,7 +59,7 @@ describe('Cypress simulator', () => {
       .and('be.visible')
   });
 
-  it.only('Help command', () => {
+  it('Help command', () => {
     cy.get('#codeInput')
       .type('help')
 
@@ -71,23 +71,48 @@ describe('Cypress simulator', () => {
       .and('contain', 'For more commands and details, visit the official Cypress API documentation.')
       .and('be.visible')
 
-      cy.contains('#outpuArea a', 'official Cypress API documentation')
-        .should('have.attr', 'href', 'https://docs.cypress.io/api/table-of-contents')
-        .and('have.attr', 'target', '_blank')
-        .and('have.attr', 'rel', 'noopener noreferrer')
-        .and('be.visible')
+    cy.contains('#outpuArea a', 'official Cypress API documentation')
+      .should('have.attr', 'href', 'https://docs.cypress.io/api/table-of-contents')
+      .and('have.attr', 'target', '_blank')
+      .and('have.attr', 'rel', 'noopener noreferrer')
+      .and('be.visible')
   });
 
-  it('Maximize/minimize', () => {
+  it('maximizes and minimizes a simulation results', () => {
+    cy.get('#codeInput')
+      .type('cy.log("Yay!")')
+    cy.get('#runButton')
+      .click();
+
+    cy.get('.expand-collapse').click()
+
+    cy.get('#outputArea', { timeout: 6000 })
+      .should('contain', 'Success')
+      .and('contain', 'cy.log("Yay!") // Logged message "Yay!"')
+      .and('be.visible')
+    cy.get('#collapseIcon').should('be.visible')
+
+    cy.get('.expand-collapse').click()
+    cy.get('#expandIcon').should('be.visible')
+  });
+
+  it('logout successfully', () => {
+    cy.get('#sandwich-menu').click()
+    cy.get('#logoutButton').click()
+
+    cy.get('#login').should('be.visible')
+      .and("contain", "Let's get started!")
+
+    cy.get('#sandwich-menu').should('not.be.visible')
 
   });
 
-  it('Logout', () => {
+  it.only('Show and hide logout button', () => {
+    cy.get('#sandwich-menu').click()
+    cy.get('#logoutButton').should('be.visible')
 
-  });
-
-  it('Show and hide logout button', () => {
-
+    cy.get('#sandwich-menu').click()
+    cy.get('#logoutButton').should('not.be.visible')
   });
 
   it('Running... state', () => {
